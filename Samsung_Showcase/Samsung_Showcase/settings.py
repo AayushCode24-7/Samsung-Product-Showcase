@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "Samsung_App",
+    "django.contrib.staticfiles", "Samsung_Showcase"
 ]
 
 MIDDLEWARE = [
