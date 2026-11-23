@@ -1,21 +1,23 @@
-
 body {
     background-color: black;
     font-family: Arial, sans-serif;
     color: white;
     margin: 0;
-    padding: 30px;
 }
 
 .login-box {
+    display: block;
     background-color: #181818;
     width: 500px;
-    margin: 20px auto;
-    padding: 50px;
+    margin: 50px auto;
+    padding: 60px;
     border-radius: 30px;
     text-align: center;
 }
 
+.login-box .p{
+    text-align: left;
+}
 h1 {
     font-size: 30px;
     font-weight: normal;
@@ -70,4 +72,13 @@ a {
 
 button:hover {
     opacity: 0.8;
+}
+
+.box{
+    background-color: #171717;
+    width: 100%;
+    padding: 50px;
+}
+.navbar .logo{
+    filter: invert(1);
 }
