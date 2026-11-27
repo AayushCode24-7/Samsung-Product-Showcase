@@ -78,7 +78,13 @@ def login_view(request):
         if not username or not password:
             messages.error(request, "Please enter both your username and password.")
         else:
-            user = authenticate(request, username=username, password=password)
+            username_or_email = username
+            if "@" in username_or_email:
+                matching_user = User.objects.filter(email__iexact=username_or_email).first()
+                if matching_user:
+                    username_or_email = matching_user.username
+
+            user = authenticate(request, username=username_or_email, password=password)
             if user:
                 login(request, user)
                 messages.success(request, f"Welcome back, {user.first_name or user.username}!")

@@ -1,31 +1,48 @@
-{% extends "base.html" %}
-{% block title %}Sign up — Samsung Showcase{% endblock %}
-{% block content %}
-<section class="auth-layout">
-    <div class="auth-panel">
-        <p class="eyebrow">JOIN THE GALAXY</p>
-        <h1>Create an account</h1>
-        <form method="post" class="auth-form">
-            {% csrf_token %}
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up — Samsung Showcase</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=6">
+</head>
+<body>
+    {% if messages %}
+        <div class="messages" aria-live="polite">
+            {% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}
+        </div>
+    {% endif %}
 
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text" autocomplete="username" required>
+    <section class="auth-layout">
+        <div class="auth-panel">
+            <a class="auth-logo" href="{% url 'home' %}" aria-label="Samsung Showcase home">
+                <img src="{% static 'images/Samsung_logo_blue.png' %}" alt="Samsung">
+            </a>
+            <p class="eyebrow">JOIN THE GALAXY</p>
+            <h1>Create an account</h1>
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
 
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" autocomplete="username" required>
 
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" autocomplete="new-password" required>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
 
-            <label for="confirm_password">Confirm password</label>
-            <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required>
-            
-            <button class="button button-dark" type="submit">Create account</button>
-        </form>
-        <p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
-        <a class="text-link" href="{% url 'home' %}">← Back to Home</a>
-    </div>
-</section>
-{% endblock %}
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="new-password" required>
+
+                <label for="confirm_password">Confirm password</label>
+                <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required>
+
+                <button class="button button-dark" type="submit">Create account</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+            <a class="text-link" href="{% url 'home' %}">← Back to Home</a>
+        </div>
+    </section>
+</body>
+</html>
