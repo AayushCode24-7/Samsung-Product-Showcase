@@ -1,161 +1,157 @@
 {% load static %}
 
-<header class="site-header">
-    <a class="logo" href="{% url 'home' %}">
-        <img src="{% static 'images/Samsung_logo_blue.png' %}" alt="Samsung Logo">
+<header class="site-header main-header">
+    <a class="logo" href="{% url 'home' %}" aria-label="Samsung Showcase home">
+        <img src="{% static 'images/Samsung_logo_blue.png' %}" alt="Samsung">
     </a>
-
-    <nav class="navbar">
-        <a class="navlink" href="{% url 'Shop' %}">Shop</a>
-        <a class="navlink" href="{% url 'Phone' %}">Phone & Tablets</a>
-        <a class="navlink" href="{% url 'Wearables' %}">Wearables</a>
-        <a class="navlink" href="{% url 'Tv' %}">TV & AV</a>
-        <a class="navlink" href="{% url 'Appliances' %}">Appliances</a>
-        <a class="navlink" href="{% url 'Pc' %}">PC & Monitors</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu</button>
+    <nav class="main-navigation" id="main-navigation" aria-label="Main navigation">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'products' %}">Products</a>
+        <a href="{% url 'products' %}?category=Phones">Phones</a>
+        <a href="{% url 'products' %}?category=TV%20%26%20AV">TV &amp; AV</a>
+        <a href="{% url 'about' %}">About</a>
     </nav>
-    <nav>
-        <a class="icon">🔎</a>
-        <a class="icon">🛒</a>
-        <button class="icon1" type="button" onclick="slideDown()" aria-label="Open user menu" aria-expanded="false">👤</button>
-        <div class="dropdown" id = "icon1">
-
-            <a href="#">Login</a>
-            <a href="#">Orders</a>
-            <a href="#">Service Centre</a>
-            <a href="#">Samsung Rewards</a>
-
-        </div>
-        
-    </nav>
-
+    <div class="account-actions">
+        {% if user.is_authenticated %}
+            <span>Hi, {{ user.first_name|default:user.username }}</span>
+            <a href="{% url 'logout' %}">Log out</a>
+        {% else %}
+            <a href="{% url 'login' %}">Log in</a>
+            <a class="signup-link" href="{% url 'signup' %}">Sign up</a>
+        {% endif %}
+    </div>
 </header>
+
+{% comment %}
 <style>
-.site-header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-height: 72px;
-    padding: 10px 32px;
-    background: #fff;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.logo img {
-    display: block;
-    width: 112px;
-    height: auto;
-}
-
-.navbar {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex: 1;
-    margin-left: 36px;
-}
-
-.navbar a,
-.navlink {
-    color: #111;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.site-header > nav:last-of-type {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-left: 24px;
-}
-
-.user-menu {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.icon1 {
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-/* Dropdown */
-.dropdown {
-    position: absolute;
-    top: 55px;
-    right: 0;
-
-    background: white;
-    width: 200px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-15px);
-    overflow: hidden;
-}
-
-/* Open dropdown */
-.dropdown.show {
-    visibility: visible;
-    animation: dropdownOpen 0.4s ease forwards;
-}
-
-/* Keyframe animation */
-@keyframes dropdownOpen {
-    0% {
-        opacity: 0;
-        transform: translateY(-15px) scale(0.95);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Dropdown links */
-.dropdown a {
-    display: block;
-    padding: 12px 15px;
-    text-decoration: none;
-    color: #10173D;
-    transition: background 0.3s;
-}
-
-.dropdown a:hover {
-    background: #f2f2f2;
-}
-
-@media (max-width: 1000px) {
     .site-header {
-        padding-inline: 16px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 72px;
+        padding: 10px 32px;
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
     }
 
     .logo img {
-        width: 90px;
+        display: block;
+        width: 112px;
+        height: auto;
     }
 
     .navbar {
-        gap: 12px;
-        margin-left: 16px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex: 1;
+        margin-left: 36px;
     }
 
     .navbar a,
     .navlink {
-        font-size: 12px;
+        color: #111;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
     }
 
-    .site-header > nav:last-of-type {
-        gap: 8px;
-        margin-left: 12px;
+    .site-header>nav:last-of-type {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-left: 24px;
     }
-}
+
+    .user-menu {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .icon1 {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    /* Dropdown */
+    .dropdown {
+        position: absolute;
+        top: 55px;
+        right: 0;
+
+        background: white;
+        width: 200px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15px);
+        overflow: hidden;
+    }
+
+    /* Open dropdown */
+    .dropdown.show {
+        visibility: visible;
+        animation: dropdownOpen 0.4s ease forwards;
+    }
+
+    /* Keyframe animation */
+    @keyframes dropdownOpen {
+        0% {
+            opacity: 0;
+            transform: translateY(-15px) scale(0.95);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Dropdown links */
+    .dropdown a {
+        display: block;
+        padding: 12px 15px;
+        text-decoration: none;
+        color: #10173D;
+        transition: background 0.3s;
+    }
+
+    .dropdown a:hover {
+        background: #f2f2f2;
+    }
+
+    @media (max-width: 1000px) {
+        .site-header {
+            padding-inline: 16px;
+        }
+
+        .logo img {
+            width: 90px;
+        }
+
+        .navbar {
+            gap: 12px;
+            margin-left: 16px;
+        }
+
+        .navbar a,
+        .navlink {
+            font-size: 12px;
+        }
+
+        .site-header>nav:last-of-type {
+            gap: 8px;
+            margin-left: 12px;
+        }
+    }
 </style>
 <script src="{% static 'js/script.js' %}"></script>
+{% endcomment %}

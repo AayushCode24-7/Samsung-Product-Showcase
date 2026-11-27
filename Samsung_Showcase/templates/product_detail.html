@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} — Samsung Showcase{% endblock %}
+{% block content %}
+<section class="detail-layout">
+    <div class="detail-art" style="--accent: {{ product.accent }}"><span>{{ product.icon }}</span></div>
+    <div class="detail-copy">
+        <p class="eyebrow">{{ product.category }}</p>
+        <h1>{{ product.name }}</h1>
+        <p class="detail-tagline">{{ product.tagline }}</p>
+        <p>{{ product.description }}</p>
+        <strong class="detail-price">From {{ product.price }}</strong>
+        <div class="detail-actions">
+            <a class="button button-dark" href="{% url 'products' %}">Continue exploring</a>
+            <a class="text-link" href="{% url 'about' %}">About Galaxy <span>→</span></a>
+        </div>
+    </div>
+</section>
+{% endblock %}

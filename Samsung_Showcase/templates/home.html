@@ -9,5 +9,166 @@
 </head>
 <body>
     {% include "navbar.html" %}
+    {% block title %}Black Friday — Samsung Showcase{% endblock %}
+
+    {% block content %}
+    <section class="offer-hero">
+        <div class="offer-hero-copy">
+            <p class="offer-kicker">SAMSUNG INDIA · 2026</p>
+            <h1>Black Friday<br>is on</h1>
+            <p>Give yourself the upgrades you've been dreaming of all year.</p>
+            <div class="offer-actions">
+                <a class="button button-dark" href="#trending">See upgrades</a>
+                <a class="offer-link" href="{% url 'products' %}">Shop all products <span>→</span></a>
+            </div>
+        </div>
+        <div class="image-placeholder offer-hero-image" role="img" aria-label="Black Friday hero image placeholder">
+            <span>Hero image</span>
+            <small>Desktop · 1440 × 640</small>
+        </div>
+    </section>
+
+    <section class="offer-promo-grid">
+        <article>
+            <div class="promo-copy">
+                <p class="offer-kicker">EXCLUSIVE BENEFITS</p>
+                <h2>Get rewards for buying from Samsung</h2>
+                <a href="{% url 'about' %}">Learn more <span>→</span></a>
+            </div>
+            <div class="image-placeholder promo-image" role="img" aria-label="Rewards promotion image placeholder"><span>Image</span></div>
+        </article>
+        <article>
+            <div class="promo-copy">
+                <p class="offer-kicker">TRADE-IN</p>
+                <h2>Trade in and upgrade for less</h2>
+                <a href="{% url 'products' %}">Explore upgrades <span>→</span></a>
+            </div>
+            <div class="image-placeholder promo-image" role="img" aria-label="Trade-in promotion image placeholder"><span>Image</span></div>
+        </article>
+    </section>
+
+    <section class="offer-section" id="trending">
+        <div class="offer-section-heading">
+            <p class="offer-kicker">POPULAR PICKS</p>
+            <h2>Trending this Black Friday</h2>
+        </div>
+
+        <nav class="category-tabs" aria-label="Product categories">
+            <a class="active" href="{% url 'products' %}">All</a>
+            <a href="{% url 'products' %}?category=Phones">Mobile</a>
+            <a href="{% url 'products' %}?category=TV%20%26%20AV">TV &AV</a>
+            <a href="{% url 'products' %}?category=Appliances">Appliances</a>
+            <a href="{% url 'products' %}?category=PC%20%26%20Tablets">Computing</a>
+            <a href="{% url 'products' %}?category=Wearables">Wearables</a>
+        </nav>
+
+        <div class="ranking-grid">
+            {% for product in featured %}
+            <article class="ranking-card">
+                <div class="ranking-top">
+                    <span>0{{ forloop.counter }}</span><small>Trending</small>
+                </div>
+                
+                <div class="image-placeholder product-image" role="img" aria-label="{{ product.name }} image placeholder">
+                    <span>{{ product.icon }}</span>
+                </div>
+
+                <p class="ranking-category">{{ product.category }}</p>
+                <h3>{{ product.name }}</h3>
+                <p class="ranking-tagline">{{ product.tagline }}</p>
+                <div class="ranking-price">
+                    <strong>{{ product.price }}</strong>
+                    <a href="{% url 'product_detail' product.slug %}" aria-label="View {{ product.name }}">Buy now</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="everyday-section">
+        <div class="offer-section-heading">
+            <p class="offer-kicker">UPGRADE YOUR EVERYDAY</p>
+            <h2>Made for every moment</h2>
+        </div>
+        <nav class="category-tabs" aria-label="Upgrade categories">
+            <a class="active" href="{% url 'products' %}?category=Phones">Mobile</a>
+            <a href="{% url 'products' %}?category=TV%20%26%20AV">Entertainment</a>
+            <a href="{% url 'products' %}?category=Appliances">Smart home</a>
+        </nav>
+        <div class="upgrade-grid">
+            <article>
+                <div class="image-placeholder upgrade-image" role="img" aria-label="Mobile upgrade image placeholder"><span>Mobile upgrade image</span></div>
+                <div class="upgrade-copy">
+                    <p>Big-screen content, anywhere you go</p>
+                    <h3>Galaxy foldable</h3>
+                    <strong>Starting ₹ 174999*</strong>
+                    <a href="{% url 'products' %}?category=Phones">Explore <span>→</span></a>
+                </div>
+            </article>
+            <article>
+                <div class="image-placeholder upgrade-image" role="img" aria-label="Wearable upgrade image placeholder"><span>Wearable image</span></div>
+                <div class="upgrade-copy">
+                    <p>Track more. Understand more.</p>
+                    <h3>Galaxy Watch</h3>
+                    <strong>Starting ₹ 29999*</strong>
+                    <a href="{% url 'products' %}?category=Wearables">Explore <span>→</span></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="offer-section bundle-section">
+        <div class="offer-section-heading centered">
+            <p class="offer-kicker">MUST-HAVE BUNDLES</p>
+            <h2>Life's better with bundles</h2>
+        </div>
+        <div class="bundle-grid">
+            <article>
+                <div class="image-placeholder bundle-image" role="img" aria-label="Phone and earbuds bundle image placeholder"><span>Phone + Buds</span></div>
+                <div class="bundle-copy"><h3>Privacy screen. Pro-level sound.</h3><p>Get both when you bundle a Galaxy phone and Galaxy Buds.</p><a class="button button-dark" href="{% url 'products' %}">Shop bundles</a></div>
+            </article>
+            <article>
+                <div class="image-placeholder bundle-image" role="img" aria-label="TV and sound device bundle image placeholder"><span>TV + Soundbar</span></div>
+                <div class="bundle-copy"><h3>Cinematic sound. Artful picture.</h3><p>Create a complete entertainment experience.</p><a class="button button-dark" href="{% url 'products' %}?category=TV%20%26%20AV">Shop bundles</a></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="savings-section">
+        <div>
+            <p class="offer-kicker">BUY MORE, SAVE MORE</p>
+            <h2>Build your everyday upgrade</h2>
+            <p>Choose your first appliance, add selected products and unlock more savings.</p>
+        </div>
+        <div class="savings-card">
+            <span>7.5% off</span><small>Buy 2 selected products</small>
+            <span>10% off</span><small>Buy 3 selected products</small>
+            <a class="button button-dark" href="{% url 'products' %}?category=Appliances">Build your bundle</a>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="offer-section-heading">
+            <p class="offer-kicker">SHOP DIRECT</p>
+            <h2>Get more from Samsung</h2>
+        </div>
+        <div class="benefits-grid">
+            <article><strong>Flexible finance</strong><p>Spread the cost over convenient monthly payments.</p><a href="{% url 'about' %}">Learn more</a></article>
+            <article><strong>Samsung rewards</strong><p>Earn rewards points on eligible purchases.</p><a href="{% url 'about' %}">Learn more</a></article>
+            <article><strong>Samsung Care+</strong><p>Explore protection and certified repair options.</p><a href="{% url 'about' %}">Learn more</a></article>
+            <article><strong>Free delivery</strong><p>Sign in for convenient delivery and installation.</p><a href="{% url 'about' %}">Learn more</a></article>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="offer-section-heading"><p class="offer-kicker">NEED HELP?</p><h2>Frequently asked questions</h2></div>
+        <div class="faq-list">
+            <details><summary>When are the Black Friday offers available?</summary><p>Campaign dates and availability may vary. Please check the offer page and selected product before purchase.</p></details>
+            <details><summary>Can I trade in my old device?</summary><p>Trade-in eligibility and valuation depend on your device model and condition.</p></details>
+            <details><summary>Are monthly payment options available?</summary><p>Available financing options and terms may vary by bank and product.</p></details>
+            <details><summary>How fast is delivery?</summary><p>Delivery speed depends on location, stock, and the selected service.</p></details>
+        </div>
+    </section>
+    {% endblock %}
 </body>
 </html>

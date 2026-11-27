@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Products — Samsung Showcase{% endblock %}
+{% block content %}
+<section class="page-hero compact">
+    <p class="eyebrow">PRODUCTS</p>
+    <h1>Find your Galaxy.</h1>
+    <p>Explore devices designed to move with you.</p>
+</section>
+<section class="content-section">
+    <div class="filter-row" aria-label="Product categories">
+        {% for category in categories %}
+            <a class="filter-chip {% if category == current_category %}active{% endif %}" href="{% url 'products' %}?category={{ category|urlencode }}">{{ category }}</a>
+        {% endfor %}
+    </div>
+    <div class="product-grid catalog">
+        {% for product in items %}
+        <article class="product-card">
+            <div class="product-art" style="--accent: {{ product.accent }}"><span class="product-monogram">{{ product.icon }}</span></div>
+            <p class="card-category">{{ product.category }}</p>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.tagline }}</p>
+            <div class="card-bottom"><strong>{{ product.price }}</strong><a class="round-link" href="{% url 'product_detail' product.slug %}" aria-label="View {{ product.name }}">→</a></div>
+        </article>
+        {% empty %}
+        <p>No products found in this category.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

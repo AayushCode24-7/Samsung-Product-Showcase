@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
+
+# Allow the sibling Samsung_App package to be imported by this project.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles", "Samsung_Showcase"
+    "django.contrib.staticfiles",
+    "Samsung_App",
 ]
 
 MIDDLEWARE = [
